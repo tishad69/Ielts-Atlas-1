@@ -40,11 +40,13 @@ export const SEED_VOCAB: Array<{
 ];
 
 export const SEED_RESOURCES: Array<{
-
-  { title: "Cambridge Trap Radar — 30 Most Common Distractors", url: "https://ieltsliz.com/ielts-reading-traps/", category: "strategy", skill: "reading", notes: "Khalid Farhan method: Memorize common Cambridge traps (extreme words, qualifying phrases, temporal shifts)." },
-  { title: "Band 9 Academic Collocation & Essay Swipe File", url: "https://docs.google.com/document/d/1DQnnnyyxC573QKML5NCTq5oo9nqiiFiQsI1TpPpVfpM/edit", category: "swipefile", skill: "writing", notes: "Pre-formulated academic phrases for environmental and materials engineering topics." },
-  { title: "Italy Fall 2027 Track & DSU Regional Scholarship Guide", url: "https://www.polimi.it/en/international-prospective-students", category: "roadmap", skill: "general", notes: "Politecnico di Milano & UniBO admissions criteria, ISEE Parificato documentation." },
-  { title: "English_Fantasy_Complete_Book.pdf (Google Drive)", url: "https://drive.google.com/file/d/1x-XKQR0VTRgPL4k4o9qx6y3LIBi5PcL9/view?usp=drivesdk", category: "book", skill: "general", notes: "Personal master textbook stored in cloud drive." },
+export const SEED_RESOURCES: Array<{
+  title: string;
+  url: string;
+  category: string;
+  skill: string;
+  notes?: string;
+}> = [
 
   title: string;
   url: string;
