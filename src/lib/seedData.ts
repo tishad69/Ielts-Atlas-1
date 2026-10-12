@@ -40,20 +40,15 @@ export const SEED_VOCAB: Array<{
 ];
 
 export const SEED_RESOURCES: Array<{
-export const SEED_RESOURCES: Array<{
   title: string;
   url: string;
   category: string;
   skill: string;
   notes?: string;
 }> = [
-
-  title: string;
-  url: string;
-  category: string;
-  skill: string;
-  notes?: string;
-}> = [
+  { title: "Cambridge Trap Radar — 30 Common Distractors", url: "https://ieltsliz.com", category: "strategy", skill: "reading", notes: "Khalid Farhan method: Master Cambridge distractor traps." },
+  { title: "Band 9 Academic Collocation Swipe File", url: "https://docs.google.com/document/d/1DQnnnyyxC573QKML5NCTq5oo9nqiiFiQsI1TpPpVfpM/edit", category: "swipefile", skill: "writing", notes: "Academic phrases for engineering topics." },
+  { title: "Italy Fall 2027 Track & DSU Regional Scholarship Guide", url: "https://www.polimi.it", category: "roadmap", skill: "general", notes: "Politecnico di Milano & UniBO admissions." },
   { title: "Engnovate — Cambridge 1-21 full practice (Listening/Reading/Writing/Speaking)", url: "https://engnovate.com", category: "tool", skill: "general", notes: "Do every test, log raw score + band in Mock Tests tab." },
   { title: "IELTS Liz — official tips & lessons", url: "https://ieltsliz.com", category: "article", skill: "general", notes: "Watch her Writing Task 2 structure + Speaking Part 2 cue card lessons." },
   { title: "Munzareen Shahid — IELTS Shikhun book", url: "", category: "tool", skill: "general", notes: "Primary structured book. Track chapter completion in Roadmap." },
@@ -62,20 +57,6 @@ export const SEED_RESOURCES: Array<{
 ];
 
 export const SEED_PHASES: Array<{
-
-  {
-    title: "Phase 5 — The 75-Day Italy Mission Sprint (Khalid Farhan Method)",
-    description: "Daily non-negotiable deliberate practice: 1 timed Cambridge test, 1 essay rewrite, 2-minute speech drill, zero fluff.",
-    colorTag: "emerald",
-    tasks: [
-      { title: "Daily Sprint: Timed Cambridge Reading or Listening Test", skill: "reading", priority: "urgent" },
-      { title: "Daily Sprint: Log all errors into Mistake Bank with root-cause analysis", skill: "general", priority: "urgent" },
-      { title: "Daily Sprint: Write 1 Task 1 or Task 2 essay and review Band 9 rewrite", skill: "writing", priority: "high" },
-      { title: "Daily Sprint: 2-minute speaking cue card drill with audio recording", skill: "speaking", priority: "high" },
-      { title: "Milestone: Finalize Statement of Purpose (SOP) for Politecnico di Milano", skill: "general", priority: "high" }
-    ],
-  },
-
   title: string;
   description: string;
   colorTag: string;
