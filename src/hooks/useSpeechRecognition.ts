@@ -2,10 +2,10 @@
 
 import { useCallback, useEffect, useRef, useState } from "react";
 
-// Minimal ambient typing for the Web Speech API (not in default TS lib dom yet everywhere).
 interface SpeechRecognitionResultLike {
   isFinal: boolean;
   0: { transcript: string };
+  length: number;
 }
 interface SpeechRecognitionEventLike extends Event {
   resultIndex: number;
@@ -44,6 +44,9 @@ export function useSpeechRecognition() {
   const isRecordingRef = useRef(false);
   const timerRef = useRef<ReturnType<typeof setInterval> | null>(null);
 
+  const baseTextRef = useRef("");
+  const sessionFinalRef = useRef("");
+
   useEffect(() => {
     const Ctor = getSpeechRecognitionCtor();
     setIsSupported(Boolean(Ctor));
@@ -55,6 +58,9 @@ export function useSpeechRecognition() {
       setIsSupported(false);
       return;
     }
+
+    baseTextRef.current = "";
+    sessionFinalRef.current = "";
     setFinalText("");
     setInterimText("");
     setSeconds(0);
@@ -67,29 +73,46 @@ export function useSpeechRecognition() {
     recognition.lang = "en-US";
 
     recognition.onresult = (event: SpeechRecognitionEventLike) => {
-      let interim = "";
-      for (let i = event.resultIndex; i < event.results.length; i++) {
+      let currentSessionFinal = "";
+      let currentSessionInterim = "";
+
+      for (let i = 0; i < event.results.length; i++) {
         const res = event.results[i];
-        const transcriptPiece = res[0].transcript;
+        const piece = res[0]?.transcript?.trim() || "";
+        if (!piece) continue;
+
         if (res.isFinal) {
-          setFinalText((prev) => `${prev}${prev ? " " : ""}${transcriptPiece.trim()}`);
+          currentSessionFinal += (currentSessionFinal ? " " : "") + piece;
         } else {
-          interim += transcriptPiece;
+          currentSessionInterim += (currentSessionInterim ? " " : "") + piece;
         }
       }
-      setInterimText(interim);
+
+      sessionFinalRef.current = currentSessionFinal;
+
+      const total = [baseTextRef.current, currentSessionFinal]
+        .filter(Boolean)
+        .join(" ")
+        .trim();
+
+      setFinalText(total);
+      setInterimText(currentSessionInterim);
     };
 
-    // Key fix for the "gap kills transcript" issue: browsers auto-stop
-    // SpeechRecognition after a short silence. We detect that and
-    // immediately restart it (without clearing already-captured text)
-    // for as long as the user is still "recording".
     recognition.onend = () => {
       if (isRecordingRef.current) {
+        const combined = [baseTextRef.current, sessionFinalRef.current]
+          .filter(Boolean)
+          .join(" ")
+          .trim();
+        baseTextRef.current = combined;
+        sessionFinalRef.current = "";
+        setInterimText("");
+
         try {
           recognition.start();
         } catch {
-          // ignore transient restart errors
+          // ignore
         }
       }
     };
@@ -105,8 +128,13 @@ export function useSpeechRecognition() {
     };
 
     recognitionRef.current = recognition;
-    recognition.start();
+    try {
+      recognition.start();
+    } catch {
+      // ignore
+    }
 
+    if (timerRef.current) clearInterval(timerRef.current);
     timerRef.current = setInterval(() => setSeconds((s) => s + 1), 1000);
   }, []);
 
@@ -116,13 +144,28 @@ export function useSpeechRecognition() {
     recognitionRef.current?.stop();
     recognitionRef.current = null;
     if (timerRef.current) clearInterval(timerRef.current);
+    setInterimText("");
   }, []);
 
   const reset = useCallback(() => {
+    baseTextRef.current = "";
+    sessionFinalRef.current = "";
     setFinalText("");
     setInterimText("");
     setSeconds(0);
   }, []);
+
+  const handleSetFinalText = useCallback(
+    (value: string | ((prev: string) => string)) => {
+      setFinalText((prev) => {
+        const next = typeof value === "function" ? value(prev) : value;
+        baseTextRef.current = next;
+        sessionFinalRef.current = "";
+        return next;
+      });
+    },
+    []
+  );
 
   useEffect(() => {
     return () => {
@@ -141,6 +184,6 @@ export function useSpeechRecognition() {
     start,
     stop,
     reset,
-    setFinalText,
+    setFinalText: handleSetFinalText,
   };
 }
