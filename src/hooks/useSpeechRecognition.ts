@@ -73,30 +73,42 @@ export function useSpeechRecognition() {
     recognition.lang = "en-US";
 
     recognition.onresult = (event: SpeechRecognitionEventLike) => {
-      let currentSessionFinal = "";
-      let currentSessionInterim = "";
-
+      const rawChunks: string[] = [];
       for (let i = 0; i < event.results.length; i++) {
         const res = event.results[i];
         const piece = res[0]?.transcript?.trim() || "";
-        if (!piece) continue;
-
-        if (res.isFinal) {
-          currentSessionFinal += (currentSessionFinal ? " " : "") + piece;
-        } else {
-          currentSessionInterim += (currentSessionInterim ? " " : "") + piece;
+        if (piece) {
+          rawChunks.push(piece);
         }
       }
 
-      sessionFinalRef.current = currentSessionFinal;
+      // Android Chrome cumulative chunk deduplication
+      const cleaned: string[] = [];
+      for (const raw of rawChunks) {
+        if (cleaned.length === 0) {
+          cleaned.push(raw);
+        } else {
+          const prev = cleaned[cleaned.length - 1];
+          if (raw.toLowerCase().startsWith(prev.toLowerCase())) {
+            cleaned[cleaned.length - 1] = raw;
+          } else if (prev.toLowerCase().startsWith(raw.toLowerCase())) {
+            // redundant prefix
+          } else {
+            cleaned.push(raw);
+          }
+        }
+      }
 
-      const total = [baseTextRef.current, currentSessionFinal]
+      const sessionText = cleaned.join(" ").trim();
+      sessionFinalRef.current = sessionText;
+
+      const total = [baseTextRef.current, sessionText]
         .filter(Boolean)
         .join(" ")
         .trim();
 
       setFinalText(total);
-      setInterimText(currentSessionInterim);
+      setInterimText("");
     };
 
     recognition.onend = () => {
