@@ -53,7 +53,7 @@ async function callOpenAI(messages: Array<{ role: string; content: string }>, js
 
   const res = await fetch("https://api.openai.com/v1/chat/completions", {
     method: "POST",
-    headers: {
+    headers: { 
       "Content-Type": "application/json",
       Authorization: `Bearer ${key}`,
     },
@@ -64,57 +64,4 @@ async function callOpenAI(messages: Array<{ role: string; content: string }>, js
       ...(jsonMode ? { response_format: { type: "json_object" } } : {}),
     }),
   });
-
-  if (!res.ok) {
-    const text = await res.text();
-    throw new Error(`OpenAI error ${res.status}: ${text}`);
-  }
-
-  const data = await res.json();
-  return data.choices?.[0]?.message?.content as string;
-}
-
-async function chatUnified(systemPrompt: string, userPrompt: string, jsonMode = false): Promise<string> {
-  if (process.env.GEMINI_API_KEY) {
-    return callGemini(systemPrompt, userPrompt, jsonMode);
-  } else if (process.env.OPENAI_API_KEY) {
-    return callOpenAI(
-      [
-        { role: "system", content: systemPrompt },
-        { role: "user", content: userPrompt }
-      ],
-      jsonMode
-    );
-  } else {
-    throw new Error("No AI API key configured.");
-  }
-}
-
-// AI Writing Evaluation
-export async function aiWritingFeedback(essayText: string, prompt: string, taskType: string) {
-  const systemPrompt = 
-    "You are an official Cambridge IELTS Examiner. Score the essay strictly against official Band Descriptors (Task Achievement, Coherence & Cohesion, Lexical Resource, Grammatical Range & Accuracy). Respond ONLY with compact valid JSON: {\"bandTa\":n,\"bandCc\":n,\"bandLr\":n,\"bandGr\":n,\"bandOverall\":n,\"strengths\":[string],\"issues\":[string],\"rewrite\":string}. Bands must be in 0.5 steps from 1 to 9.";
-
-  const userPrompt = `Task type: ${taskType}\nPrompt: ${prompt || "(not provided)"}\n\nCandidate Essay:\n${essayText}`;
-  const rawJson = await chatUnified(systemPrompt, userPrompt, true);
-  return JSON.parse(rawJson);
-}
-
-// AI Speaking Diagnostic Feedback (Strict IELTS Relevance & Band 8.5 Standards)
-export async function aiSpeakingFeedback(transcript: string, question: string, part: string) {
-  const systemPrompt = 
-    "You are a certified senior Cambridge IELTS Speaking examiner evaluating a candidate aiming for Band 8.5. Assess strictly on Fluency & Coherence, Lexical Resource, Grammatical Range & Accuracy, and Pronunciation.\n\nCRITICAL TASK RELEVANCE RULE: First check if the candidate actually answered the given question. If the response is off-topic, evasive, nonsensical, or wanders into unrelated subjects, heavily penalize Fluency & Coherence and Overall score, and explicitly explain the irrelevance in 'issues' with an '⚠️ Off-topic' tag.\n\nIdentify exact grammar/vocabulary slips under 'issues'. Provide 1-2 authentic strengths under 'strengths'. Provide an authentic, high-level native Band 8.5 sample answer under 'modelAnswer'.\n\nRespond ONLY with compact valid JSON: {\"bandOverall\":n,\"fluency\":n,\"lexical\":n,\"grammar\":n,\"strengths\":[string],\"issues\":[string],\"modelAnswer\":string}. All scores must be multiples of 0.5 between 1.0 and 9.0.";
-
-  const userPrompt = `Speaking Part: ${part}\nQuestion: "${question || "General IELTS Speaking"}"\nCandidate Transcript: "${transcript}"`;
-  const rawJson = await chatUnified(systemPrompt, userPrompt, true);
-  return JSON.parse(rawJson);
-}
-
-// AI Speaking Conversation Partner (Mihu)
-export async function aiChatReply(history: Array<{ role: string; content: string }>) {
-  const systemPrompt = 
-    "You are Mihu, an encouraging but precise Cambridge IELTS Speaking examiner. Ask natural IELTS Part 1/2/3 follow-up questions, gently note grammar slips in brackets, and keep responses concise (under 70 words).";
-
-  const conversationText = history.map(h => `${h.role.toUpperCase()}: ${h.content}`).join("\n");
-  return chatUnified(systemPrompt, conversationText, false);
-}
+�������ɕ̹�����(��������Ёѕ�Ѐ�݅�Ёɕ̹ѕ�Р��(����ѡɽ܁��܁�ɽȡ�=���$���ɽȀ��ɕ̹�х����耑�ѕ������(���((������Ё��ф��݅�Ёɕ̹�ͽ����(��ɕ��ɸ���ф����������l�t�����ͅ�������ѕ�Ё�́��ɥ���)�()��幌��չ�ѥ�������U����������ѕ�Aɽ������ɥ�����͕�Aɽ������ɥ�����ͽ�5����􁙅�͔��Aɽ��͔���ɥ�����(�������ɽ���̹��ع5%9%}A%}-d���(����ɕ��ɸ��������������ѕ�Aɽ��а��͕�Aɽ��а��ͽ�5�����(��􁕱͔������ɽ���̹��ع=A9%}A%}-d���(����ɕ��ɸ�����=���$�(������l(���������ɽ��耉���ѕ�������ѕ������ѕ�Aɽ��Ё��(���������ɽ��耉�͕Ȉ�����ѕ����͕�Aɽ��Ё�(������t�(�������ͽ�5���(������(��􁕱͔��(����ѡɽ܁��܁�ɽȠ�9��$�A$���䁍������ɕ�����(���)�((���$�]ɥѥ���م�Յѥ��)�����Ё��幌��չ�ѥ�����]ɥѥ������������ͅ�Q������ɥ�����ɽ������ɥ����хͭQ������ɥ�����(������Ё���ѕ�Aɽ��Ѐ�(�����e�ԁ�ɔ����������������ɥ����%1QL�ᅵ���ȸ�M��ɔ�ѡ����ͅ���ɥ�ѱ䁅�����Ё���������	�����͍ɥ�ѽ�̀�Q�ͬ�����ٕ���а����ɕ���������ͥ����1�᥍���I�ͽ�ɍ���Ʌ���ѥ����I����������Ʌ�䤸�I�������=91d�ݥѠ�������Ёم����)M=8��p�����Q�p�鸱p������p�鸱p�����1�p�鸱p������p�鸱p�����=ٕɅ��p�鸱p���ɕ��ѡ�p��m��ɥ��t�p����Օ�p��m��ɥ��t�p�ɕ�ɥѕp����ɥ�����	���́���Ё��������ԁ�ѕ�́�ɽ��āѼ�丈�((������Ё�͕�Aɽ��Ѐ�Q�ͬ�����耑�хͭQ����q�Aɽ���耑��ɽ��Ё�������Ё�ɽ٥������q�q�������є��ͅ��q����ͅ�Q������(������ЁɅ�)ͽ���݅�Ё����U����������ѕ�Aɽ��а��͕�Aɽ��а���Ք��(��ɕ��ɸ�)M=8����͔�Ʌ�)ͽ���)�((���$�M��������������ѥ�����������M�ɥ�Ё%1QL�I���م������	�����ԁMх���ɑ̤)�����Ё��幌��չ�ѥ�����M����������������Ʌ�͍ɥ�����ɥ�����Օ�ѥ�����ɥ�����������ɥ�����(������Ё���ѕ�Aɽ��Ѐ�(�����e�ԁ�ɔ������ѥ�����͕���ȁ���ɥ����%1QL�M���������ᅵ���ȁ�م�Յѥ������������є����������ȁ	�����Ը��͕�́��ɥ�ѱ䁽���Օ��䀘����ɕ�����1�᥍���I�ͽ�ɍ���Ʌ���ѥ����I����������Ʌ�䰁����Aɽ�չ���ѥ���q�q�I%Q%0�QM,�I1Y9�IU1����Ё���������ѡ���������є����Յ��䁅��ݕɕ��ѡ����ٕ���Օ�ѥ����%��ѡ��ɕ����͔��́����ѽ������مͥٔ�����͕�ͥ������ȁ݅����́��Ѽ�չɕ��ѕ���Չ����̰����٥��������锁�Օ��䀘����ɕ��������=ٕɅ���͍�ɔ�������������ѱ䁕�������ѡ����ɕ��م�������p����Օ�p��ݥѠ����p��j���<�=���ѽ���p��х��q�q�%���ѥ�䁕ᅍЁ�Ʌ���Ƚٽ���ձ���ͱ��́չ��ȁp����Օ�p���Aɽ٥���Ĵȁ��ѡ��ѥ����ɕ��ѡ́չ��ȁp���ɕ��ѡ�p���Aɽ٥��������ѡ��ѥ����������ٕ����ѥٔ�	�����ԁͅ��������ݕȁչ��ȁp��������ݕ�p��q�q�I�������=91d�ݥѠ�������Ёم����)M=8��p�����=ٕɅ��p�鸱p���Օ���p�鸱p���᥍��p�鸱p��Ʌ����p�鸱p���ɕ��ѡ�p��m��ɥ��t�p����Օ�p��m��ɥ��t�p��������ݕ�p����ɥ��������͍�ɕ́���Ё����ձѥ���́�����ԁ���ݕ���ĸ�����������((������Ё�͕�Aɽ��Ѐ�M��������A���耑������q�EՕ�ѥ���p����Օ�ѥ����������Ʌ��%1QL�M���������p�q�������є�QɅ�͍ɥ���p����Ʌ�͍ɥ���p���(������ЁɅ�)ͽ���݅�Ё����U����������ѕ�Aɽ��а��͕�Aɽ��а���Ք��(��ɕ��ɸ�)M=8����͔�Ʌ�)ͽ���)�((���$�M����������ٕ�ͅѥ���A��ѹ�Ȁ�5��Ԥ)�����Ё��幌��չ�ѥ��������I���䡡��ѽ����Ʌ���ɽ�����ɥ��쁍��ѕ�����ɥ��������(������Ё���ѕ�Aɽ��Ѐ�(�����e�ԁ�ɔ�5��԰���������Ʌ�������Ё�ɕ��͔����ɥ����%1QL�M���������ᅵ���ȸ�ͬ�����Ʌ��%1QL�A��Ѐļȼ́�����ܵ����Օ�ѥ��̰����ѱ䁹�є��Ʌ���ȁͱ��́����Ʌ����̰����������ɕ����͕́�����͔��չ��Ȁ���ݽɑ̤���((������Ё���ٕ�ͅѥ��Q��Ѐ􁡥�ѽ�乵�������������ɽ���ѽU�����͔���耑������ѕ������������q����(��ɕ��ɸ�����U����������ѕ�Aɽ��а����ٕ�ͅѥ��Q��а����͔��)�
