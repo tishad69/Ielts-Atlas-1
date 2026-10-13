@@ -14,7 +14,7 @@ async function callGroq(messages: Array<{ role: string; content: string }>, json
       Authorization: `Bearer ${key}`,
     },
     body: JSON.stringify({
-      model: "llama-3.3-70b-versatile",
+      model: "llama-3.1-8b-instant",
       messages,
       temperature: 0.2,
       ...(jsonMode ? { response_format: { type: "json_object" } } : {}),
