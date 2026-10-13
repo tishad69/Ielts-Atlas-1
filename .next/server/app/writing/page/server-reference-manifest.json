@@ -1,0 +1,29 @@
+{
+  "node": {
+    "4087184c475a5887b3eff856ef0fb7a1a9b7a1a298": {
+      "workers": {
+        "app/writing/page": {
+          "moduleId": 82401,
+          "async": true,
+          "exportedName": "submitWriting",
+          "filename": "src/app/actions/writing.ts"
+        }
+      },
+      "exportedName": "submitWriting",
+      "filename": "src/app/actions/writing.ts"
+    },
+    "4099b13710a1714a3fb97633edf991eaab55a53c88": {
+      "workers": {
+        "app/writing/page": {
+          "moduleId": 82401,
+          "async": true,
+          "exportedName": "deleteWriting",
+          "filename": "src/app/actions/writing.ts"
+        }
+      },
+      "exportedName": "deleteWriting",
+      "filename": "src/app/actions/writing.ts"
+    }
+  },
+  "edge": {}
+}

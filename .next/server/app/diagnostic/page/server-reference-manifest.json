@@ -1,0 +1,17 @@
+{
+  "node": {
+    "4059175d4ac436c36f69e909b8474f9c979b1af3a1": {
+      "workers": {
+        "app/diagnostic/page": {
+          "moduleId": 76470,
+          "async": true,
+          "exportedName": "submitDiagnostic",
+          "filename": "src/app/actions/diagnostic.ts"
+        }
+      },
+      "exportedName": "submitDiagnostic",
+      "filename": "src/app/actions/diagnostic.ts"
+    }
+  },
+  "edge": {}
+}

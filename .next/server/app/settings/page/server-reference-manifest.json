@@ -1,0 +1,17 @@
+{
+  "node": {
+    "40b949595949f8681a7ca7c51e713b2ac7e06fe550": {
+      "workers": {
+        "app/settings/page": {
+          "moduleId": 18126,
+          "async": true,
+          "exportedName": "updateProfile",
+          "filename": "src/app/actions/profile.ts"
+        }
+      },
+      "exportedName": "updateProfile",
+      "filename": "src/app/actions/profile.ts"
+    }
+  },
+  "edge": {}
+}

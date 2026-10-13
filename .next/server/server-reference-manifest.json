@@ -1,0 +1,306 @@
+{
+  "node": {
+    "40bc75a974bbb979fdd445aa50f836416d6bfefc20": {
+      "workers": {
+        "app/daily/page": {
+          "moduleId": 30962,
+          "async": true,
+          "exportedName": "addDailyLog",
+          "filename": "src/app/actions/dailyLogs.ts"
+        }
+      },
+      "filename": "src/app/actions/dailyLogs.ts",
+      "exportedName": "addDailyLog"
+    },
+    "401cf1370eb478c4cd3347af517c57d490eb1f1563": {
+      "workers": {
+        "app/daily/page": {
+          "moduleId": 30962,
+          "async": true,
+          "exportedName": "deleteDailyLog",
+          "filename": "src/app/actions/dailyLogs.ts"
+        }
+      },
+      "filename": "src/app/actions/dailyLogs.ts",
+      "exportedName": "deleteDailyLog"
+    },
+    "4059175d4ac436c36f69e909b8474f9c979b1af3a1": {
+      "workers": {
+        "app/diagnostic/page": {
+          "moduleId": 76470,
+          "async": true,
+          "exportedName": "submitDiagnostic",
+          "filename": "src/app/actions/diagnostic.ts"
+        }
+      },
+      "filename": "src/app/actions/diagnostic.ts",
+      "exportedName": "submitDiagnostic"
+    },
+    "40bd8d1f274247ae7f7417360b959e2e201eaa8b29": {
+      "workers": {
+        "app/mistakes/page": {
+          "moduleId": 56185,
+          "async": true,
+          "exportedName": "addMistake",
+          "filename": "src/app/actions/mistakes.ts"
+        }
+      },
+      "filename": "src/app/actions/mistakes.ts",
+      "exportedName": "addMistake"
+    },
+    "40a600bc3cdc53a47d8a69f0efa547ba2d82559014": {
+      "workers": {
+        "app/mistakes/page": {
+          "moduleId": 56185,
+          "async": true,
+          "exportedName": "toggleMistakeResolved",
+          "filename": "src/app/actions/mistakes.ts"
+        }
+      },
+      "filename": "src/app/actions/mistakes.ts",
+      "exportedName": "toggleMistakeResolved"
+    },
+    "40bce975d0e0485b9d83e75470aae7bb1fdcf8e269": {
+      "workers": {
+        "app/mistakes/page": {
+          "moduleId": 56185,
+          "async": true,
+          "exportedName": "deleteMistake",
+          "filename": "src/app/actions/mistakes.ts"
+        }
+      },
+      "filename": "src/app/actions/mistakes.ts",
+      "exportedName": "deleteMistake"
+    },
+    "407730296eed1f8916884204e219a39455d61f1d38": {
+      "workers": {
+        "app/mock-tests/page": {
+          "moduleId": 89667,
+          "async": true,
+          "exportedName": "addMockTest",
+          "filename": "src/app/actions/mockTests.ts"
+        }
+      },
+      "filename": "src/app/actions/mockTests.ts",
+      "exportedName": "addMockTest"
+    },
+    "40bd7b1ea59d5bbb1366a03b499e5379d91ed557c5": {
+      "workers": {
+        "app/mock-tests/page": {
+          "moduleId": 89667,
+          "async": true,
+          "exportedName": "deleteMockTest",
+          "filename": "src/app/actions/mockTests.ts"
+        }
+      },
+      "filename": "src/app/actions/mockTests.ts",
+      "exportedName": "deleteMockTest"
+    },
+    "409c928b5c548cc9d18c1573251a9109d9de45f938": {
+      "workers": {
+        "app/resources/page": {
+          "moduleId": 12058,
+          "async": true,
+          "exportedName": "addResource",
+          "filename": "src/app/actions/resources.ts"
+        }
+      },
+      "filename": "src/app/actions/resources.ts",
+      "exportedName": "addResource"
+    },
+    "4025c8067c9fb8062714534a04c0f927219201e921": {
+      "workers": {
+        "app/resources/page": {
+          "moduleId": 12058,
+          "async": true,
+          "exportedName": "toggleFavorite",
+          "filename": "src/app/actions/resources.ts"
+        }
+      },
+      "filename": "src/app/actions/resources.ts",
+      "exportedName": "toggleFavorite"
+    },
+    "408283558a227de137bc1c898e52dc32b5ab2b01df": {
+      "workers": {
+        "app/resources/page": {
+          "moduleId": 12058,
+          "async": true,
+          "exportedName": "deleteResource",
+          "filename": "src/app/actions/resources.ts"
+        }
+      },
+      "filename": "src/app/actions/resources.ts",
+      "exportedName": "deleteResource"
+    },
+    "403c1191f9cef8fd881be27591c7ffe372424c9ea7": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "addPhase",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "filename": "src/app/actions/roadmap.ts",
+      "exportedName": "addPhase"
+    },
+    "4065cd547b2c14e9e5bfe6cb8c3b2f07b70bf07167": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "addTask",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "filename": "src/app/actions/roadmap.ts",
+      "exportedName": "addTask"
+    },
+    "40470efe96bc5c0fd84f3692bc8779c728af7f524c": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "toggleTaskStatus",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "filename": "src/app/actions/roadmap.ts",
+      "exportedName": "toggleTaskStatus"
+    },
+    "40d93a60e9bdc21901f09fc38698119430213379cb": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "deleteTask",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "filename": "src/app/actions/roadmap.ts",
+      "exportedName": "deleteTask"
+    },
+    "402dc38d87954ae786ae364a4b0a73687eb8931541": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "deletePhase",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "filename": "src/app/actions/roadmap.ts",
+      "exportedName": "deletePhase"
+    },
+    "40b949595949f8681a7ca7c51e713b2ac7e06fe550": {
+      "workers": {
+        "app/settings/page": {
+          "moduleId": 18126,
+          "async": true,
+          "exportedName": "updateProfile",
+          "filename": "src/app/actions/profile.ts"
+        }
+      },
+      "filename": "src/app/actions/profile.ts",
+      "exportedName": "updateProfile"
+    },
+    "404765f347c5ad35a9f2132d671669e0e95679b1d2": {
+      "workers": {
+        "app/speaking/page": {
+          "moduleId": 67728,
+          "async": true,
+          "exportedName": "submitSpeaking",
+          "filename": "src/app/actions/speaking.ts"
+        }
+      },
+      "filename": "src/app/actions/speaking.ts",
+      "exportedName": "submitSpeaking"
+    },
+    "401716f28aa751bd365c97238650c7c81829d8d3e3": {
+      "workers": {
+        "app/speaking/page": {
+          "moduleId": 67728,
+          "async": true,
+          "exportedName": "deleteSpeaking",
+          "filename": "src/app/actions/speaking.ts"
+        }
+      },
+      "filename": "src/app/actions/speaking.ts",
+      "exportedName": "deleteSpeaking"
+    },
+    "608296187263f982ac6ac7b1f72bcd3a55d20da557": {
+      "workers": {
+        "app/speaking/page": {
+          "moduleId": 67728,
+          "async": true,
+          "exportedName": "chatReply",
+          "filename": "src/app/actions/speaking.ts"
+        }
+      },
+      "filename": "src/app/actions/speaking.ts",
+      "exportedName": "chatReply"
+    },
+    "40ce8a1d3fde3490ebc550461041996427aca87856": {
+      "workers": {
+        "app/vocabulary/page": {
+          "moduleId": 97486,
+          "async": true,
+          "exportedName": "addVocab",
+          "filename": "src/app/actions/vocabulary.ts"
+        }
+      },
+      "filename": "src/app/actions/vocabulary.ts",
+      "exportedName": "addVocab"
+    },
+    "4043082756a1197df63f1a4bee45d84ed4035313bf": {
+      "workers": {
+        "app/vocabulary/page": {
+          "moduleId": 97486,
+          "async": true,
+          "exportedName": "deleteVocab",
+          "filename": "src/app/actions/vocabulary.ts"
+        }
+      },
+      "filename": "src/app/actions/vocabulary.ts",
+      "exportedName": "deleteVocab"
+    },
+    "40071fb13df9beb4086b82afd4f790d5c4b6721e4c": {
+      "workers": {
+        "app/vocabulary/page": {
+          "moduleId": 97486,
+          "async": true,
+          "exportedName": "reviewVocab",
+          "filename": "src/app/actions/vocabulary.ts"
+        }
+      },
+      "filename": "src/app/actions/vocabulary.ts",
+      "exportedName": "reviewVocab"
+    },
+    "4087184c475a5887b3eff856ef0fb7a1a9b7a1a298": {
+      "workers": {
+        "app/writing/page": {
+          "moduleId": 82401,
+          "async": true,
+          "exportedName": "submitWriting",
+          "filename": "src/app/actions/writing.ts"
+        }
+      },
+      "filename": "src/app/actions/writing.ts",
+      "exportedName": "submitWriting"
+    },
+    "4099b13710a1714a3fb97633edf991eaab55a53c88": {
+      "workers": {
+        "app/writing/page": {
+          "moduleId": 82401,
+          "async": true,
+          "exportedName": "deleteWriting",
+          "filename": "src/app/actions/writing.ts"
+        }
+      },
+      "filename": "src/app/actions/writing.ts",
+      "exportedName": "deleteWriting"
+    }
+  },
+  "edge": {},
+  "encryptionKey": "Qxz6YHn+hQcwox/89Xkw86+T++RZGZLMNefGrA4MDkw="
+}

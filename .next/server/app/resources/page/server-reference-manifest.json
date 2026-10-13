@@ -1,0 +1,41 @@
+{
+  "node": {
+    "409c928b5c548cc9d18c1573251a9109d9de45f938": {
+      "workers": {
+        "app/resources/page": {
+          "moduleId": 12058,
+          "async": true,
+          "exportedName": "addResource",
+          "filename": "src/app/actions/resources.ts"
+        }
+      },
+      "exportedName": "addResource",
+      "filename": "src/app/actions/resources.ts"
+    },
+    "4025c8067c9fb8062714534a04c0f927219201e921": {
+      "workers": {
+        "app/resources/page": {
+          "moduleId": 12058,
+          "async": true,
+          "exportedName": "toggleFavorite",
+          "filename": "src/app/actions/resources.ts"
+        }
+      },
+      "exportedName": "toggleFavorite",
+      "filename": "src/app/actions/resources.ts"
+    },
+    "408283558a227de137bc1c898e52dc32b5ab2b01df": {
+      "workers": {
+        "app/resources/page": {
+          "moduleId": 12058,
+          "async": true,
+          "exportedName": "deleteResource",
+          "filename": "src/app/actions/resources.ts"
+        }
+      },
+      "exportedName": "deleteResource",
+      "filename": "src/app/actions/resources.ts"
+    }
+  },
+  "edge": {}
+}

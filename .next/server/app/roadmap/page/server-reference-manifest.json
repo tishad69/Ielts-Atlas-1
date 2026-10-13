@@ -1,0 +1,65 @@
+{
+  "node": {
+    "403c1191f9cef8fd881be27591c7ffe372424c9ea7": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "addPhase",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "exportedName": "addPhase",
+      "filename": "src/app/actions/roadmap.ts"
+    },
+    "4065cd547b2c14e9e5bfe6cb8c3b2f07b70bf07167": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "addTask",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "exportedName": "addTask",
+      "filename": "src/app/actions/roadmap.ts"
+    },
+    "40470efe96bc5c0fd84f3692bc8779c728af7f524c": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "toggleTaskStatus",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "exportedName": "toggleTaskStatus",
+      "filename": "src/app/actions/roadmap.ts"
+    },
+    "40d93a60e9bdc21901f09fc38698119430213379cb": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "deleteTask",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "exportedName": "deleteTask",
+      "filename": "src/app/actions/roadmap.ts"
+    },
+    "402dc38d87954ae786ae364a4b0a73687eb8931541": {
+      "workers": {
+        "app/roadmap/page": {
+          "moduleId": 98438,
+          "async": true,
+          "exportedName": "deletePhase",
+          "filename": "src/app/actions/roadmap.ts"
+        }
+      },
+      "exportedName": "deletePhase",
+      "filename": "src/app/actions/roadmap.ts"
+    }
+  },
+  "edge": {}
+}

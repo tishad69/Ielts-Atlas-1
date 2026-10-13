@@ -1,0 +1,41 @@
+{
+  "node": {
+    "404765f347c5ad35a9f2132d671669e0e95679b1d2": {
+      "workers": {
+        "app/speaking/page": {
+          "moduleId": 67728,
+          "async": true,
+          "exportedName": "submitSpeaking",
+          "filename": "src/app/actions/speaking.ts"
+        }
+      },
+      "exportedName": "submitSpeaking",
+      "filename": "src/app/actions/speaking.ts"
+    },
+    "401716f28aa751bd365c97238650c7c81829d8d3e3": {
+      "workers": {
+        "app/speaking/page": {
+          "moduleId": 67728,
+          "async": true,
+          "exportedName": "deleteSpeaking",
+          "filename": "src/app/actions/speaking.ts"
+        }
+      },
+      "exportedName": "deleteSpeaking",
+      "filename": "src/app/actions/speaking.ts"
+    },
+    "608296187263f982ac6ac7b1f72bcd3a55d20da557": {
+      "workers": {
+        "app/speaking/page": {
+          "moduleId": 67728,
+          "async": true,
+          "exportedName": "chatReply",
+          "filename": "src/app/actions/speaking.ts"
+        }
+      },
+      "exportedName": "chatReply",
+      "filename": "src/app/actions/speaking.ts"
+    }
+  },
+  "edge": {}
+}

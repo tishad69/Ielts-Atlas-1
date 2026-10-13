@@ -12,7 +12,6 @@ export async function submitSpeaking(formData: FormData) {
   const question = String(formData.get("question") || "");
   const transcript = String(formData.get("transcript") || "").trim();
   const durationSeconds = Number(formData.get("durationSeconds") || 60);
-  if (!transcript) return;
 
   const heuristic = analyzeSpeaking(transcript, durationSeconds);
   let record: { bandOverall: number; feedback: Record<string, unknown> } = {
@@ -56,9 +55,71 @@ export async function submitSpeaking(formData: FormData) {
         },
       };
     }
-  } else {
-    record = {
-      bandOverall: heuristic.bandOverall,
-      feedback: {
-        fluency: heuristic.bandFluency,
-        lexical: heuristic.bandM�᥍���(���������Ʌ����聡��ɥ�ѥ������Ʌ���Ȱ(����������ɕ��ѡ�聡��ɥ�ѥ����ɕ��ѡ̰(�����������Օ��l(������������j���<�$�9�Ё�������5%9%}A%}-d��́��Ё��ѕ�ѕ�����͕�ٕȁ��٥ɽ����и��(����������������ɥ�ѥ�����Օ̰(��������t�(���������х��聡��ɥ�ѥ��(��������(������(���((���݅�Ё�����͕�С��������M��ͥ��̤�م�Օ̡�(�������а(�����Օ�ѥ���(�����Ʌ�͍ɥ�а(������Ʌѥ��M�����̰(����ݽɑ�A��5���є聡��ɥ�ѥ��ݽɑ�A��5���є�(�����������չ�聡��ɥ�ѥ���������չа(�������ɕ��ɐ�(�����((��ɕم����ѕA�Ѡ��������������(��ɕم����ѕA�Ѡ������)�()�����Ё��幌��չ�ѥ�������ѕM����������ɵ�ф��ɵ�ф���(������Ё����9յ��ȡ��ɵ�ф���Р�������(���݅�Ё�������є���������M��ͥ��̤�ݡ�ɔ��ġ��������M��ͥ��̹���������(��ɕم����ѕA�Ѡ��������������(��ɕم����ѕA�Ѡ������)�()�����Ё��幌��չ�ѥ���Ʌ����EՕ�ѥ����������ɥ�����(������Ё������MA-%9}EUMQ%=9}	9-m����t����MA-%9}EUMQ%=9}	9,�������(��ɕ��ɸ�����m5�Ѡ�����ȡ5�Ѡ�Ʌ������������������Ѡ�t�)�()����Ё11	-}=11=]UAL�I���ɐ���ɥ������ɥ��mt����(��������l(�����%�ѕɕ�ѥ�����ձ���ԁѕ����������Ё��ɔ�����Ёݡ�ѡ�Ё�����(�����9��������ԁѡ������ȁ�����������ѡ�́ݥ�������������ѡ������ɔ���(�����Q����́��ȁ͡�ɥ����!�܁��ѕ�����́ѡ�Ё���������ȁ�����(������������ݕȸ�����ԁ�����ɔ�ѡ�ЁݥѠ���܁ѡ���́ݕɔ�����܁啅�́������(��t�(��������l(�����ɕ�Ё�ѽ�䃊P�ݡ�Ё݅́ѡ�����Ё���������������Ё���ѡ�Ё����ɥ�������(�����Q��Ёͽչ�́����Ʌ�����!�܁�����Ё������ԁ�������ѕ�݅ɑ����(�����Q����́��ȁ��͍ɥ�����ѡ�и�]�ձ���ԁɕ���������ЁѼ��ѡ�����]�����(��t�(��������l(�����Q���q���́�����ȁ����и����ԁѡ����ѡ����ٕɹ���Ё͡�ձ�����䁄������ȁɽ�����ɔ���(�����%�ѕɕ�ѥ����������ѥٔ��P�ݡ�Ё����Ёѡ������ͥє�٥�ܰ��́ѡ�ɔ���ɥЁѼ������(����������!�܁����ԁѡ����ѡ�́���Ք�ݥ��������������啅�����(��t�)��()�չ�ѥ������ɥ�ѥ������9�є��͕�Q������ɥ�����(������Ё������̀��͕�Q��йѽ1�ݕ��͔�����э���q��յ�񱥭���ԁ����񤁵�����Յ����ͥ�����q��������mt������Ѡ�(������������̀��̤�ɕ��ɸ���mQ���$���ѥ��������܁�����ȁݽɑ̀�մ��������P�������ͥ���ͥ���ѱ䁥��ѕ���t��(�������͕�Q��й����Р�q̬������ѕȡ	������������Ѡ����Ԥ�ɕ��ɸ���mQ�����䁕�ѕ��������ȁ���ݕȁݥѠ���ɕ�ͽ����������ᅵ����t��(��ɕ��ɸ����)�()�����Ё��幌��չ�ѥ�������I���䡡��ѽ����Ʌ���ɽ�����ɥ��쁍��ѕ�����ɥ��������������ɥ�����(�������������������(��������(����������Ёɕ����݅�Ё�����I���䡡��ѽ�䁅́�ɽ��耉�͕Ȉ������ͥ�х�Ј�������ѕ��쁍��ѕ�����ɥ����mt��(������ɕ��ɸ�ɕ����(����􁍅э���(��������������ѡɽ՝��Ѽ����ɥ�ѥ�(�����(���(������Ё������11	-}=11=]UAMm����t����11	-}=11=]UAL�������(������Ё����U͕Ȁ�l������ѽ��t�ɕٕ�͔�������l���������ɽ�������͕Ȉ��(������Ё��є�􁱅��U͕Ȁ�����ɥ�ѥ������9�є�����U͕ȹ���ѕ�Ф�耈��(������ЁĀ�����m5�Ѡ�����ȡ5�Ѡ�Ʌ������������������Ѡ�t�(��ɕ��ɸ����������ѕ���)�(
+  }
+
+  await db.insert(speakingSessions).values({
+    part,
+    question,
+    transcript,
+    durationSeconds,
+    wordsPerMinute: heuristic.wordsPerMinute,
+    fillerCount: heuristic.fillerCount,
+    ...record,
+  });
+
+  revalidatePath("/speaking");
+  revalidatePath("/");
+}
+
+export async function deleteSpeaking(formData: FormData) {
+  const id = Number(formData.get("id"));
+  await db.delete(speakingSessions).where(eq(speakingSessions.id, id));
+  revalidatePath("/speaking");
+}
+
+export async function randomQuestion(part: string) {
+  const bank = SPEAKING_QUESTION_BANK[part] || SPEAKING_QUESTION_BANK.part1;
+  return bank[Math.floor(Math.random() * bank.length)];
+}
+
+const FALLBACK_FOLLOWUPS: Record<string, string[]> = {
+  part1: [
+    "Interesting! Could you tell me a bit more about why that is?",
+    "Nice. Do you think your opinion on this will change in the future?",
+    "Thanks for sharing. How often does that happen for you?",
+    "Good answer. Can you compare that with how things were a few years ago?",
+  ],
+  part2: [
+    "Great story — what was the most challenging part of that experience?",
+    "That sounds memorable. How did it make you feel afterwards?",
+    "Thanks for describing that. Would you recommend it to others? Why?",
+  ],
+  part3: [
+    "That is a fair point. Do you think the government should play a bigger role here?",
+    "Interesting perspective — what about the opposite view, is there merit to it?",
+    "Good. How do you think this issue will look in 10 years?",
+  ],
+};
+
+function heuristicFillerNote(userText: string) {
+  const fillers = (userText.toLowerCase().match(/(um|uh|like|you know|i mean|actually|basically)/g) || []).length;
+  if (fillers >= 3) return " [Tip: I noticed a few filler words (um/like) — try pausing silently instead.]";
+  if (userText.split(/\s+/).filter(Boolean).length < 15) return " [Tip: try extending your answer with a reason and an example.]";
+  return "";
+}
+
+export async function chatReply(history: Array<{ role: string; content: string }>, part: string) {
+  if (aiEnabled()) {
+    try {
+      const reply = await aiChatReply(history as { role: "user" | "assistant" | "system"; content: string }[]);
+      return reply;
+    } catch {
+      // fall through
+    }
+  }
+  const pool = FALLBACK_FOLLOWUPS[part] || FALLBACK_FOLLOWUPS.part1;
+  const lastUser = [...history].reverse().find((m) => m.role === "user");
+  const note = lastUser ? heuristicFillerNote(lastUser.content) : "";
+  const q = pool[Math.floor(Math.random() * pool.length)];
+  return `${q}${note}`;
+}

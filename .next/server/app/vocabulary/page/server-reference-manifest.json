@@ -1,0 +1,41 @@
+{
+  "node": {
+    "40ce8a1d3fde3490ebc550461041996427aca87856": {
+      "workers": {
+        "app/vocabulary/page": {
+          "moduleId": 97486,
+          "async": true,
+          "exportedName": "addVocab",
+          "filename": "src/app/actions/vocabulary.ts"
+        }
+      },
+      "exportedName": "addVocab",
+      "filename": "src/app/actions/vocabulary.ts"
+    },
+    "4043082756a1197df63f1a4bee45d84ed4035313bf": {
+      "workers": {
+        "app/vocabulary/page": {
+          "moduleId": 97486,
+          "async": true,
+          "exportedName": "deleteVocab",
+          "filename": "src/app/actions/vocabulary.ts"
+        }
+      },
+      "exportedName": "deleteVocab",
+      "filename": "src/app/actions/vocabulary.ts"
+    },
+    "40071fb13df9beb4086b82afd4f790d5c4b6721e4c": {
+      "workers": {
+        "app/vocabulary/page": {
+          "moduleId": 97486,
+          "async": true,
+          "exportedName": "reviewVocab",
+          "filename": "src/app/actions/vocabulary.ts"
+        }
+      },
+      "exportedName": "reviewVocab",
+      "filename": "src/app/actions/vocabulary.ts"
+    }
+  },
+  "edge": {}
+}

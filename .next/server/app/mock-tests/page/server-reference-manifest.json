@@ -1,0 +1,29 @@
+{
+  "node": {
+    "407730296eed1f8916884204e219a39455d61f1d38": {
+      "workers": {
+        "app/mock-tests/page": {
+          "moduleId": 89667,
+          "async": true,
+          "exportedName": "addMockTest",
+          "filename": "src/app/actions/mockTests.ts"
+        }
+      },
+      "exportedName": "addMockTest",
+      "filename": "src/app/actions/mockTests.ts"
+    },
+    "40bd7b1ea59d5bbb1366a03b499e5379d91ed557c5": {
+      "workers": {
+        "app/mock-tests/page": {
+          "moduleId": 89667,
+          "async": true,
+          "exportedName": "deleteMockTest",
+          "filename": "src/app/actions/mockTests.ts"
+        }
+      },
+      "exportedName": "deleteMockTest",
+      "filename": "src/app/actions/mockTests.ts"
+    }
+  },
+  "edge": {}
+}

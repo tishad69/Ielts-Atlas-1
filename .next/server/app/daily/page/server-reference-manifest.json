@@ -1,0 +1,29 @@
+{
+  "node": {
+    "40bc75a974bbb979fdd445aa50f836416d6bfefc20": {
+      "workers": {
+        "app/daily/page": {
+          "moduleId": 30962,
+          "async": true,
+          "exportedName": "addDailyLog",
+          "filename": "src/app/actions/dailyLogs.ts"
+        }
+      },
+      "exportedName": "addDailyLog",
+      "filename": "src/app/actions/dailyLogs.ts"
+    },
+    "401cf1370eb478c4cd3347af517c57d490eb1f1563": {
+      "workers": {
+        "app/daily/page": {
+          "moduleId": 30962,
+          "async": true,
+          "exportedName": "deleteDailyLog",
+          "filename": "src/app/actions/dailyLogs.ts"
+        }
+      },
+      "exportedName": "deleteDailyLog",
+      "filename": "src/app/actions/dailyLogs.ts"
+    }
+  },
+  "edge": {}
+}

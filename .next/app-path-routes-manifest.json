@@ -1,0 +1,16 @@
+{
+  "/_global-error/page": "/_global-error",
+  "/_not-found/page": "/_not-found",
+  "/api/health/route": "/api/health",
+  "/daily/page": "/daily",
+  "/diagnostic/page": "/diagnostic",
+  "/mistakes/page": "/mistakes",
+  "/mock-tests/page": "/mock-tests",
+  "/page": "/",
+  "/resources/page": "/resources",
+  "/roadmap/page": "/roadmap",
+  "/settings/page": "/settings",
+  "/speaking/page": "/speaking",
+  "/vocabulary/page": "/vocabulary",
+  "/writing/page": "/writing"
+}

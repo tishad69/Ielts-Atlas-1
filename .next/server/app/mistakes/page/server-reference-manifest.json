@@ -1,0 +1,41 @@
+{
+  "node": {
+    "40bd8d1f274247ae7f7417360b959e2e201eaa8b29": {
+      "workers": {
+        "app/mistakes/page": {
+          "moduleId": 56185,
+          "async": true,
+          "exportedName": "addMistake",
+          "filename": "src/app/actions/mistakes.ts"
+        }
+      },
+      "exportedName": "addMistake",
+      "filename": "src/app/actions/mistakes.ts"
+    },
+    "40a600bc3cdc53a47d8a69f0efa547ba2d82559014": {
+      "workers": {
+        "app/mistakes/page": {
+          "moduleId": 56185,
+          "async": true,
+          "exportedName": "toggleMistakeResolved",
+          "filename": "src/app/actions/mistakes.ts"
+        }
+      },
+      "exportedName": "toggleMistakeResolved",
+      "filename": "src/app/actions/mistakes.ts"
+    },
+    "40bce975d0e0485b9d83e75470aae7bb1fdcf8e269": {
+      "workers": {
+        "app/mistakes/page": {
+          "moduleId": 56185,
+          "async": true,
+          "exportedName": "deleteMistake",
+          "filename": "src/app/actions/mistakes.ts"
+        }
+      },
+      "exportedName": "deleteMistake",
+      "filename": "src/app/actions/mistakes.ts"
+    }
+  },
+  "edge": {}
+}

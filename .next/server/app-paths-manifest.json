@@ -1,0 +1,16 @@
+{
+  "/_global-error/page": "app/_global-error/page.js",
+  "/_not-found/page": "app/_not-found/page.js",
+  "/api/health/route": "app/api/health/route.js",
+  "/daily/page": "app/daily/page.js",
+  "/diagnostic/page": "app/diagnostic/page.js",
+  "/mistakes/page": "app/mistakes/page.js",
+  "/mock-tests/page": "app/mock-tests/page.js",
+  "/page": "app/page.js",
+  "/resources/page": "app/resources/page.js",
+  "/roadmap/page": "app/roadmap/page.js",
+  "/settings/page": "app/settings/page.js",
+  "/speaking/page": "app/speaking/page.js",
+  "/vocabulary/page": "app/vocabulary/page.js",
+  "/writing/page": "app/writing/page.js"
+}
