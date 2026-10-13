@@ -1,16 +1,10 @@
 // Dual-Engine AI Bridge: Supports 100% Free Google Gemini 1.5 Flash and OpenAI.
-// If either GEMINI_API_KEY or OPENAI_API_KEY is configured in the environment,
-// these helpers upgrade the heuristic engines with real LLM output.
-// If no key is present, callers fall back to local heuristic engines
-// (writingEngine.ts / speakingEngine.ts) — the app works fully offline/free either way.
 
 export function aiEnabled(): boolean {
   return Boolean(process.env.GEMINI_API_KEY || process.env.OPENAI_API_KEY);
 }
 
-// -------------------------------------------------------------
-// Google Gemini 1.5 Flash API Client (Free Tier via aistudio.google.com)
-// -------------------------------------------------------------
+// Google Gemini 1.5 Flash Client
 async function callGemini(systemPrompt: string, userPrompt: string, jsonMode = false): Promise<string> {
   const key = process.env.GEMINI_API_KEY;
   if (!key) throw new Error("GEMINI_API_KEY not configured");
@@ -22,12 +16,12 @@ async function callGemini(systemPrompt: string, userPrompt: string, jsonMode = f
       {
         role: "user",
         parts: [
-          { text: `${systemPrompt}\n\nUser Request:\n${userPrompt}` }
+          { text: `${systemPrompt}\n\nCandidate Submission:\n${userPrompt}` }
         ]
       }
     ],
     generationConfig: {
-      temperature: 0.3,
+      temperature: 0.2,
     }
   };
 
@@ -52,9 +46,7 @@ async function callGemini(systemPrompt: string, userPrompt: string, jsonMode = f
   return text;
 }
 
-// -------------------------------------------------------------
-// OpenAI Client (GPT-4o-mini)
-// -------------------------------------------------------------
+// OpenAI Client (Fallback)
 async function callOpenAI(messages: Array<{ role: string; content: string }>, jsonMode = false): Promise<string> {
   const key = process.env.OPENAI_API_KEY;
   if (!key) throw new Error("OPENAI_API_KEY not configured");
@@ -68,7 +60,7 @@ async function callOpenAI(messages: Array<{ role: string; content: string }>, js
     body: JSON.stringify({
       model: "gpt-4o-mini",
       messages,
-      temperature: 0.4,
+      temperature: 0.3,
       ...(jsonMode ? { response_format: { type: "json_object" } } : {}),
     }),
   });
@@ -82,7 +74,6 @@ async function callOpenAI(messages: Array<{ role: string; content: string }>, js
   return data.choices?.[0]?.message?.content as string;
 }
 
-// Unified LLM Dispatcher
 async function chatUnified(systemPrompt: string, userPrompt: string, jsonMode = false): Promise<string> {
   if (process.env.GEMINI_API_KEY) {
     return callGemini(systemPrompt, userPrompt, jsonMode);
@@ -95,42 +86,34 @@ async function chatUnified(systemPrompt: string, userPrompt: string, jsonMode = 
       jsonMode
     );
   } else {
-    throw new Error("No AI API key configured (neither GEMINI_API_KEY nor OPENAI_API_KEY).");
+    throw new Error("No AI API key configured.");
   }
 }
 
-// -------------------------------------------------------------
-// AI Writing Evaluation & Band 9 Master Rewrite
-// -------------------------------------------------------------
+// AI Writing Evaluation
 export async function aiWritingFeedback(essayText: string, prompt: string, taskType: string) {
   const systemPrompt = 
-    "You are an official Senior Cambridge IELTS Examiner. Score the essay strictly against the official Band Descriptors for Task Achievement/Response, Coherence & Cohesion, Lexical Resource, and Grammatical Range & Accuracy. Respond ONLY with compact valid JSON: {\"bandTa\":n,\"bandCc\":n,\"bandLr\":n,\"bandGr\":n,\"bandOverall\":n,\"strengths\":[string],\"issues\":[string],\"rewrite\":string}. Bands are numbers in 0.5 steps from 1 to 9. 'rewrite' must be a full, authentic Band-9 rewritten version of the candidate's essay incorporating sophisticated collocations, complex clause structures, and academic tone.";
+    "You are an official Cambridge IELTS Examiner. Score the essay strictly against official Band Descriptors (Task Achievement, Coherence & Cohesion, Lexical Resource, Grammatical Range & Accuracy). Respond ONLY with compact valid JSON: {\"bandTa\":n,\"bandCc\":n,\"bandLr\":n,\"bandGr\":n,\"bandOverall\":n,\"strengths\":[string],\"issues\":[string],\"rewrite\":string}. Bands must be in 0.5 steps from 1 to 9.";
 
   const userPrompt = `Task type: ${taskType}\nPrompt: ${prompt || "(not provided)"}\n\nCandidate Essay:\n${essayText}`;
-
   const rawJson = await chatUnified(systemPrompt, userPrompt, true);
   return JSON.parse(rawJson);
 }
 
-// -------------------------------------------------------------
-// AI Speaking Diagnostic Feedback
-// -------------------------------------------------------------
+// AI Speaking Diagnostic Feedback (Strict IELTS Relevance & Band 8.5 Standards)
 export async function aiSpeakingFeedback(transcript: string, question: string, part: string) {
   const systemPrompt = 
-    "You are a certified IELTS Speaking examiner. Assess the candidate transcript against Fluency & Coherence, Lexical Resource, Grammatical Range & Accuracy, and Pronunciation proxy. Respond ONLY with compact valid JSON: {\"bandOverall\":n,\"fluency\":n,\"lexical\":n,\"grammar\":n,\"strengths\":[string],\"issues\":[string],\"modelAnswer\":string}. Bands are numbers in 0.5 steps from 1 to 9.";
+    "You are a certified senior Cambridge IELTS Speaking examiner evaluating a candidate aiming for Band 8.5. Assess strictly on Fluency & Coherence, Lexical Resource, Grammatical Range & Accuracy, and Pronunciation.\n\nCRITICAL TASK RELEVANCE RULE: First check if the candidate actually answered the given question. If the response is off-topic, evasive, nonsensical, or wanders into unrelated subjects, heavily penalize Fluency & Coherence and Overall score, and explicitly explain the irrelevance in 'issues' with an '⚠️ Off-topic' tag.\n\nIdentify exact grammar/vocabulary slips under 'issues'. Provide 1-2 authentic strengths under 'strengths'. Provide an authentic, high-level native Band 8.5 sample answer under 'modelAnswer'.\n\nRespond ONLY with compact valid JSON: {\"bandOverall\":n,\"fluency\":n,\"lexical\":n,\"grammar\":n,\"strengths\":[string],\"issues\":[string],\"modelAnswer\":string}. All scores must be multiples of 0.5 between 1.0 and 9.0.";
 
-  const userPrompt = `Speaking Part: ${part}\nQuestion: ${question || "(not provided)"}\n\nCandidate Transcript:\n${transcript}`;
-
+  const userPrompt = `Speaking Part: ${part}\nQuestion: "${question || "General IELTS Speaking"}"\nCandidate Transcript: "${transcript}"`;
   const rawJson = await chatUnified(systemPrompt, userPrompt, true);
   return JSON.parse(rawJson);
 }
 
-// -------------------------------------------------------------
-// Mihu AI Speaking Conversation Partner Chat
-// -------------------------------------------------------------
+// AI Speaking Conversation Partner (Mihu)
 export async function aiChatReply(history: Array<{ role: string; content: string }>) {
   const systemPrompt = 
-    "You are Mihu, an encouraging but precise IELTS Speaking partner bot. Ask natural IELTS Part 1/2/3 style follow-up questions based on the user's replies, gently note grammar/vocabulary slips in brackets after your reply, and keep responses concise (under 80 words).";
+    "You are Mihu, an encouraging but precise Cambridge IELTS Speaking examiner. Ask natural IELTS Part 1/2/3 follow-up questions, gently note grammar slips in brackets, and keep responses concise (under 70 words).";
 
   const conversationText = history.map(h => `${h.role.toUpperCase()}: ${h.content}`).join("\n");
   return chatUnified(systemPrompt, conversationText, false);
